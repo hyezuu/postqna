@@ -32,6 +32,7 @@ public class User {
     @Column(nullable = false, length = 13, unique = true)
     private String phone;
 
+    private String weather;
 //    @Column(nullable = false, updatable = false)//잘가라....시큐리티에 넌 필요없어
 //    @Enumerated(EnumType.STRING)
 //    private UserAuthority userAuthority = UserAuthority.Member;
@@ -43,11 +44,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVE;
 
-    @JsonIgnoreProperties("user")
+//    @JsonIgnoreProperties("user")
     @OneToMany(mappedBy = "user")
     private List<Question> questions = new ArrayList<>();
 
-    @JsonIgnoreProperties("user")
+//    @JsonIgnoreProperties("user")
     @OneToMany(mappedBy = "user")
     private List<Answer> answers = new ArrayList<>();
 

@@ -36,6 +36,8 @@ public class Answer {
     @Column(nullable = false)
     private String content;
 
+    private int likeCount;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private AccessAuthority accessAuthority;//public이면 - 모든사람가능, private이면 - 작성자와 관리자만 가능

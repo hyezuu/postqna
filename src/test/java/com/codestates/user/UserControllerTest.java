@@ -42,6 +42,7 @@ public class UserControllerTest {
     public void postUserTest() throws Exception {
         //given
         UserDto.Post post = new UserDto.Post("hgd@gmail.com",
+                "1111",
                 "홍길동",
                 "010-1234-5678");
         String content = gson.toJson(post);

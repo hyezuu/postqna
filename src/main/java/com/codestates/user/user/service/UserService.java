@@ -7,6 +7,7 @@ import com.codestates.question.entity.Question;
 import com.codestates.user.user.entity.User;
 import com.codestates.user.user.entity.UserAuthority;
 import com.codestates.user.user.repository.UserRepository;
+import com.codestates.weather.WeatherService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +25,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
+    private final WeatherService weatherService;
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       CustomAuthorityUtils authorityUtils) {
+                       CustomAuthorityUtils authorityUtils, WeatherService weatherService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
+        this.weatherService = weatherService;
     }
 
     public User createUser(User user) {
@@ -46,6 +50,8 @@ public class UserService {
 
         User savedUser = saveUser(user);
         savedUser.setQuestion(new Question());
+        String weather = weatherService.getWeather("35.682123","127.892307", LocalDateTime.parse("2024-01-10T15:00"));
+        savedUser.setWeather(weather);
 
         return savedUser;
     }
