@@ -19,8 +19,8 @@ public class LikeController {
         this.likeService = likeService;
         this.userService = userService;
     }
-    @PostMapping("{answer-id}")
-    public ResponseEntity addLike(@PathVariable("answer-id")@Positive long answerId,
+    @PostMapping("/answer/{answer-id}")
+    public ResponseEntity addLikeToAnswer(@PathVariable("answer-id")@Positive long answerId,
                                   @RequestParam @Positive long userId){
         User user = userService.findUser(userId);//member Repository or memberService에서 member가져오는 로직 필요
 
